@@ -1,0 +1,22 @@
+body {
+    background-color: #cccccc;
+}
+
+#map {
+    height: 50%;
+    width: 100%;
+}
+
+.test {
+    background-color: #4E4E4E;
+    color: #FFFFFF;
+}
+
+#infos {
+    background-color: #868e96;
+}
+
+#bouton_reserver {
+    background-color: #868E96;
+    color: #FFFFFF;
+}

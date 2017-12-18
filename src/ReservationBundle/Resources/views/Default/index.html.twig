@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Réservation du Louvre</title>
+
+    {% block stylesheets %}
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link href="{{ asset('js/bootstrap.js') }}">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+
+    {% endblock %}
+
+</head>
+<body>
+<!--Section top -->
+<section id="top">
+    <div class="container-fluid">
+        <div class="row justify-content-center m-2">
+            <div class="container">
+                <img class="embed-responsive" src="{{ asset('Louvre_Museum.jpg') }}">
+            </div>
+        </div>
+    </div>
+</section>
+<!--Section  -->
+<section id="reservation-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="container">
+                <div class="col-lg-12">
+                    <!-- Section form -->
+                    <section id="form">
+                        <div class="row">
+                            {{ form(form) }}
+                            <div class="col-lg-6 col-md-12 badge-light">
+                                <div class="test p-2  row justify-content-start">
+                                    1 - Choisir une date
+                                </div>
+                                <div class="form-inline m-2">
+                                    <div class="col-sm-6">
+                                        <label type="text" >Jour de la visite</label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input placeholder="JJ/MM/YYYY" class="form-control w-100" id="datepicker">
+                                    </div>
+                                </div>
+                                <div class="test p-2  row justify-content-start">
+                                    2 - Choisir le type de billet
+                                </div>
+                                <div class="form-inline m-2">
+                                    <div class="col-sm-6">
+                                        <label for="sel1">Type de billet</label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <select class="form-control w-100" id="sel1">
+                                            <option>Journée</option>
+                                            <option>Demi-journée</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="test p-2  row justify-content-start">
+                                    3 - Choisir le nombre de billet
+                                </div>
+                                <div class="form-inline m-2 text-center">
+                                    <div class="col-sm-6">
+                                        <label for="sel11">Billet Tarif Normal</label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <select class="form-control w-100" id="sel11">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    {{ include("ReservationBundle:Default:footer.html.twig") }}
+
+    {% block javascripts %}
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8ZDycWLNyfK62bbu9o_pSTsZsQjgalBU &callback=initMap">
+        </script>
+        <script>
+            function initMap() {
+                var louvre = {lat: 48.860711, lng: 2.337640};
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 15,
+                    center: louvre
+                });
+                var marker = new google.maps.Marker({
+                    position: louvre,
+                    map: map
+                });
+            }
+        </script>
+        <script>
+            $(function(){
+                disableTuesday = function(date) {
+                    console.log(date);
+                    var day = date.getDay();
+                    if (day == 2) {
+                        return [false] ;
+                    }
+                    else {
+                        return [true] ;
+                    }
+                }
+                $('#datepicker').datepicker({ beforeShowDay: disableTuesday });
+            })
+        </script>
+
+    {% endblock %}
+
+</body>
+</html>
