@@ -5,7 +5,8 @@ namespace ReservationBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\BooleanType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use UserBundle\Form\UserType;
 
 class TicketType extends AbstractType
 {
@@ -15,10 +16,9 @@ class TicketType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('reduced', BooleanType::class)
-            ->add('user')
-            ->add('status')
-            ->add('command');
+            ->add('reduced', CheckboxType::class)
+            ->add('user',    UserType::class);
+
     }
     
     /**

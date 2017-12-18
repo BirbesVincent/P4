@@ -5,6 +5,8 @@ namespace ReservationBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class CommandType extends AbstractType
 {
@@ -14,8 +16,12 @@ class CommandType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('date')
-            ->add('ticket',   TicketType::class);
+            ->add('date',   DateTimeType::class)
+            ->add('tickets', CollectionType::class, array(
+                'entry_type'   => TicketType::class,
+                'allow_add'    => true,
+                'allow_delete' => true
+            ));
     }
     
     /**

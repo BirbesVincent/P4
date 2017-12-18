@@ -5,7 +5,8 @@ namespace UserBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 class UserType extends AbstractType
 {
     /**
@@ -14,10 +15,15 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstName')
-            ->add('lastName')
-            ->add('birthday')
-            ->add('country');
+            ->add('firstName',  TextType::class)
+            ->add('lastName',   TextType::class)
+            ->add('birthday',   DateTimeType::class,array(
+                'label'         => 'Date de naissance *',
+                'required'      => true,
+                'widget'        =>'single_text',
+                'placeholder'   =>'jj/mm/aaaa',
+                'format'        =>'dd/MM/yyyy'))
+            ->add('country',    TextType::class);
     }
     
     /**
