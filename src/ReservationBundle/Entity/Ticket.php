@@ -31,11 +31,6 @@ class Ticket
     private $user;
 
     /**
-     * @ORM\OneToOne(targetEntity="ReservationBundle\Entity\Status", cascade={"persist"})
-     */
-    private $status;
-
-    /**
      * @ORM\ManyToOne(targetEntity="ReservationBundle\Entity\Command", inversedBy="tickets")
      * @ORM\JoinColumn(nullable=false)
      */

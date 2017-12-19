@@ -2,7 +2,9 @@
 
 namespace ReservationBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use ReservationBundle\Entity\Ticket;
 
 /**
  * Command
@@ -29,9 +31,19 @@ class Command
     private $date;
 
     /**
-     * @ORM\OneToMany(targetEntity="ReservationBundle\Entity\Ticket", mappedBy="command")
+     * @ORM\Column(type="boolean")
      */
-    private $tickets;
+    private $type;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $nb_tickets;
 
 
     /**
@@ -67,5 +79,93 @@ class Command
     {
         return $this->date;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tickets = new ArrayCollection();
+    }
 
+    /**
+     * Add ticket
+     *
+     * @param Ticket $ticket
+     *
+     * @return Command
+     */
+    public function addTicket(Ticket $ticket)
+    {
+        $this->tickets[] = $ticket;
+
+        return $this;
+    }
+
+    /**
+     * Remove ticket
+     *
+     * @param Ticket $ticket
+     */
+    public function removeTicket(Ticket $ticket)
+    {
+        $this->tickets->removeElement($ticket);
+    }
+
+    /**
+     * Get tickets
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTickets()
+    {
+        return $this->tickets;
+    }
+
+    /**
+     * Set type
+     *
+     * @param boolean $type
+     *
+     * @return Command
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return boolean
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return Command
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+}

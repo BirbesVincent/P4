@@ -7,21 +7,16 @@ use ReservationBundle\Entity\Command;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use ReservationBundle\Form\TicketType;
 use ReservationBundle\Form\CommandType;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        /*
-        $ticket = new Ticket();
-        $form = $this->get('form.factory')->create(TicketType::class, $ticket);
-        return $this->render('ReservationBundle:Default:index.html.twig', array(
-            'form' => $form->createView()
-        ));
-        */
-
         $command = new Command();
+        $em = $this->getDoctrine()->getManager();
         $form = $this->get('form.factory')->create(CommandType::class, $command);
+
         return $this->render('ReservationBundle:Default:index.html.twig', array(
             'form' => $form->createView()
         ));

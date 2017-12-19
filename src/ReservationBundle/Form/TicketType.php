@@ -16,8 +16,12 @@ class TicketType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('reduced', CheckboxType::class)
-            ->add('user',    UserType::class);
+            ->add('reduced', CheckboxType::class, array(
+                'label' => 'Tarif Réduit ?'
+            ))
+            ->add('user',    UserType::class, array(
+                'label' => 'Informations sur le visiteur'
+            ));
 
     }
     

@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e6e5d38-63e9-4c94-910c-f503ed90770c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
-      <change beforePath="$PROJECT_DIR$/src/ReservationBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/ReservationBundle/Controller/DefaultController.php" />
       <change beforePath="$PROJECT_DIR$/src/ReservationBundle/Form/CommandType.php" afterPath="$PROJECT_DIR$/src/ReservationBundle/Form/CommandType.php" />
-      <change beforePath="$PROJECT_DIR$/src/ReservationBundle/Form/TicketType.php" afterPath="$PROJECT_DIR$/src/ReservationBundle/Form/TicketType.php" />
-      <change beforePath="$PROJECT_DIR$/src/ReservationBundle/Resources/views/Default/index.html.twig" afterPath="$PROJECT_DIR$/src/ReservationBundle/Resources/views/Default/index.html.twig" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Form/UserType.php" afterPath="$PROJECT_DIR$/src/UserBundle/Form/UserType.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,10 +19,11 @@
       <file leaf-file-name="CommandType.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ReservationBundle/Form/CommandType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="7" lean-forward="true" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
+            <state relative-caret-position="425">
+              <caret line="25" column="40" lean-forward="false" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="40" />
               <folding>
                 <element signature="e#42#82#0#PHP" expanded="true" />
+                <marker date="1513619559262" expanded="true" signature="795:981" ph="..." />
               </folding>
             </state>
           </provider>
@@ -361,12 +356,12 @@
       <workItem from="1512987115500" duration="10620000" />
       <workItem from="1513006689424" duration="2513000" />
       <workItem from="1513598957840" duration="8000000" />
-      <workItem from="1513614152183" duration="4664000" />
+      <workItem from="1513614152183" duration="5162000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30146000" />
+    <option name="totallyTimeSpent" value="30644000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -429,6 +424,7 @@
           <caret line="16" column="12" lean-forward="false" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
           <folding>
             <element signature="e#42#82#0#PHP" expanded="true" />
+            <marker date="1513619559262" expanded="true" signature="795:981" ph="..." />
           </folding>
         </state>
       </provider>
@@ -719,10 +715,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ReservationBundle/Form/CommandType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="7" lean-forward="true" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
+        <state relative-caret-position="425">
+          <caret line="25" column="40" lean-forward="false" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="40" />
           <folding>
             <element signature="e#42#82#0#PHP" expanded="true" />
+            <marker date="1513619559262" expanded="true" signature="795:981" ph="..." />
           </folding>
         </state>
       </provider>

@@ -3,8 +3,9 @@
 namespace ReservationBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
 use ReservationBundle\Entity\Ticket;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Command
@@ -27,13 +28,42 @@ class Command
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetimetz")
+     * @Assert\DateTime()
+     * @Assert\GreaterThanOrEqual(
+     *     value = "today",
+     *     message = "Cette valeur doit être plus grand ou équivalent à {{ compared_value }}"
+     * )
+     *
      */
     private $date;
 
     /**
-     * @ORM\OneToMany(targetEntity="ReservationBundle\Entity\Ticket", mappedBy="command")
+     * @ORM\Column(type="boolean")
+     * @Assert\Type(
+     *     type="bool",
+     *     message="La valeur {{ value }} n'est pas du type {{ type }}."
+     * )
      */
-    private $tickets;
+    private $type;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Email(
+     *     message="L'adresse email n'est pas valide"
+     * )
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *     min = 1,
+     *     max = 20,
+     *     minMessage = "Le nombre de visiteurs doit être au minimum de {{ limit }}",
+     *     maxMessage = "Le nombre de visiteurs doit être au maximum de {{ limit }}"
+     * )
+     */
+    private $nb_tickets;
 
 
     /**
@@ -109,5 +139,77 @@ class Command
     public function getTickets()
     {
         return $this->tickets;
+    }
+
+    /**
+     * Set type
+     *
+     * @param boolean $type
+     *
+     * @return Command
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return boolean
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return Command
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set nbTickets
+     *
+     * @param integer $nbTickets
+     *
+     * @return Command
+     */
+    public function setNbTickets($nbTickets)
+    {
+        $this->nb_tickets = $nbTickets;
+
+        return $this;
+    }
+
+    /**
+     * Get nbTickets
+     *
+     * @return integer
+     */
+    public function getNbTickets()
+    {
+        return $this->nb_tickets;
     }
 }
