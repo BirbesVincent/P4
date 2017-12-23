@@ -6,7 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use UserBundle\Form\UserType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class TicketType extends AbstractType
 {
@@ -19,8 +20,20 @@ class TicketType extends AbstractType
             ->add('reduced', CheckboxType::class, array(
                 'label' => 'Tarif Réduit ?'
             ))
-            ->add('user',    UserType::class, array(
-                'label' => 'Informations sur le visiteur'
+            ->add('firstName',  TextType::class, array(
+                'label'         => 'Prénom'
+            ))
+            ->add('lastName',   TextType::class, array(
+                'label'         => 'Nom'
+            ))
+            ->add('birthday',   DateTimeType::class,array(
+                'label'         => 'Date de naissance *',
+                'required'      => true,
+                'widget'        =>'single_text',
+                'placeholder'   =>'jj/mm/aaaa',
+                'format'        =>'dd/MM/yyyy'))
+            ->add('country',    TextType::class, array(
+                'label'         => 'Pays'
             ));
 
     }

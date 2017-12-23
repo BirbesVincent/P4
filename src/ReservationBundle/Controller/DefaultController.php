@@ -15,10 +15,20 @@ class DefaultController extends Controller
     {
         $command = new Command();
         $em = $this->getDoctrine()->getManager();
-        $form = $this->get('form.factory')->create(CommandType::class, $command);
+        $reservationForm = $this->get('form.factory')->create(CommandType::class, $command);
+
+        //if form is submitted
+        if($request->isMethod('POST') && $reservationForm->handleRequest($request)->isValid()){
+
+
+
+
+
+
+        }
 
         return $this->render('ReservationBundle:Default:index.html.twig', array(
-            'form' => $form->createView()
+            'form' => $reservationForm->createView()
         ));
 
 

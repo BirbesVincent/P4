@@ -46,7 +46,7 @@
                                     <div class="form-group col-6 col-md-6">
                                         {{ form_label(form.date, "Date", {'label_attr': {'class': 'control-label'}}) }}
                                         {{ form_errors(form.date) }}
-                                        {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_widget(form.date, {'id': 'datepicker' , 'attr': {'class': 'form-control'}}) }}
                                     </div>
                                     <div class="form-group col-6 col-md-6">
                                         {{ form_label(form.type, "Type", {'label_attr': {'class': 'control-label'}}) }}
@@ -62,13 +62,12 @@
                                         {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
                                     </div>
                                     <div class="form-group col-6 col-md-6">
-                                        {{ form_label(form.nb_tickets, "Nombre Tickets", {'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.nb_tickets) }}
-                                        {{ form_widget(form.nb_tickets, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_label(form.tickets, "Tickets", {'label_attr': {'class': 'control-label'}}) }}
+                                        {{ form_errors(form.tickets) }}
+                                        {{ form_widget(form.tickets, {'attr': {'class': 'form-control'}}) }}
+                                        <a href="#" id="add_category" class="btn btn-default">Ajouter un ticket</a>
                                     </div>
                                 </div>
-
-
                                 {{ form_rest(form) }}
                                 {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
                                 {{ form_end(form) }}
@@ -142,6 +141,52 @@
                 });
             })
         </script>
+
+
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var $container = $('div#reservationbundle_command_tickets');
+                var index = $container.find(':input').length;
+                $('#add_category').click(function(e) {
+                    addCategory($container);
+                    e.preventDefault();
+                    return false;
+                });
+
+                if (index == 0) {
+                    addCategory($container);
+                } else {
+                    $container.children('div').each(function() {
+                        addDeleteLink($(this));
+                    });
+                }
+
+                function addCategory($container) {
+                    var template = $container.attr('data-prototype')
+                        .replace(/__name__label__/g, 'Catégorie n°' + (index+1))
+                        .replace(/__name__/g,        index)
+                    ;
+
+                    var $prototype = $(template);
+                    addDeleteLink($prototype);
+                    $container.append($prototype);
+                    index++;
+                }
+
+                function addDeleteLink($prototype) {
+                    var $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer</a>');
+                    $prototype.append($deleteLink);
+                    $deleteLink.click(function(e) {
+                        $prototype.remove();
+                        e.preventDefault();
+                        return false;
+                    });
+                }
+            });
+        </script>
+
+
 
     {% endblock %}
 

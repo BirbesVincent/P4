@@ -3,8 +3,9 @@
 namespace ReservationBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
 use ReservationBundle\Entity\Ticket;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Command
@@ -27,23 +28,33 @@ class Command
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetimetz")
+     * @Assert\DateTime()
+     * @Assert\GreaterThanOrEqual(
+     *     value = "today",
+     *     message = "Cette valeur doit être plus grand ou équivalent à {{ compared_value }}"
+     * )
+     *
      */
     private $date;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Assert\Type(
+     *     type="bool",
+     *     message="La valeur {{ value }} n'est pas du type {{ type }}."
+     * )
      */
     private $type;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email(
+     *     message="L'adresse email n'est pas valide"
+     * )
      */
     private $email;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $nb_tickets;
+    private $tickets;
 
 
     /**
@@ -168,4 +179,5 @@ class Command
     {
         return $this->email;
     }
+
 }

@@ -54,16 +54,7 @@ class Command
      */
     private $email;
 
-    /**
-     * @ORM\Column(type="integer")
-     * @Assert\Range(
-     *     min = 1,
-     *     max = 20,
-     *     minMessage = "Le nombre de visiteurs doit être au minimum de {{ limit }}",
-     *     maxMessage = "Le nombre de visiteurs doit être au maximum de {{ limit }}"
-     * )
-     */
-    private $nb_tickets;
+    private $tickets;
 
 
     /**
@@ -189,27 +180,4 @@ class Command
         return $this->email;
     }
 
-    /**
-     * Set nbTickets
-     *
-     * @param integer $nbTickets
-     *
-     * @return Command
-     */
-    public function setNbTickets($nbTickets)
-    {
-        $this->nb_tickets = $nbTickets;
-
-        return $this;
-    }
-
-    /**
-     * Get nbTickets
-     *
-     * @return integer
-     */
-    public function getNbTickets()
-    {
-        return $this->nb_tickets;
-    }
 }
