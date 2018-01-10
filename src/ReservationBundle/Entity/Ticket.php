@@ -53,7 +53,7 @@ class Ticket
     private $country;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ReservationBundle\Entity\Command", inversedBy="tickets")
+     * @ORM\ManyToOne(targetEntity="ReservationBundle\Entity\Command", inversedBy="tickets", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $command;
@@ -62,6 +62,21 @@ class Ticket
      * @ORM\Column(name="reduced", type="boolean")
      */
     private $reduced;
+
+    /**
+     * @ORM\Column(name="price", type="float")
+     */
+    private $price;
+
+    /**
+     * @ORM\Column(name="type", type="string")
+     */
+    private $type;
+
+    public function getAge()
+    {
+        return $this->getBirthday()->diff(new \DateTime())->y;
+    }
 
 
     /**
@@ -217,5 +232,54 @@ class Ticket
     public function getCountry()
     {
         return $this->country;
+    }
+
+
+    /**
+     * Set price
+     *
+     * @param integer $price
+     *
+     * @return Ticket
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return integer
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return Ticket
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

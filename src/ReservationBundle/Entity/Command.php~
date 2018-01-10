@@ -54,6 +54,9 @@ class Command
      */
     private $email;
 
+    /**
+     * @ORM\OneToMany(targetEntity="ReservationBundle\Entity\Ticket", mappedBy="Command")
+     */
     private $tickets;
 
 

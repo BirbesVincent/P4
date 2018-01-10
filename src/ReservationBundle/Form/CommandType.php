@@ -20,9 +20,10 @@ class CommandType extends AbstractType
     {
         $builder
             ->add('date',   DateType::class,array(
-                'label'     => 'Date de reservation',
+                'label'     => 'Date de visite',
                 'format'    =>'dd/MM/yyyy',
                 'widget'    =>'single_text',
+                'attr' => ['readonly' => true],
                 'html5'     => false
             ))
             ->add('type',   ChoiceType::class,array(

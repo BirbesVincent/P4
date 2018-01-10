@@ -54,8 +54,20 @@ class Command
      */
     private $email;
 
+    /**
+     * @ORM\OneToMany(targetEntity="ReservationBundle\Entity\Ticket", mappedBy="Command")
+     */
     private $tickets;
 
+    public function getTotalPrice()
+    {
+        $totalPrice = 0;
+        $tickets = $this->getTickets();
+        foreach ($tickets as $ticket){
+            $totalPrice += $ticket->getPrice();
+        }
+        return $totalPrice * 100;
+    }
 
     /**
      * Get id
