@@ -1,71 +1,127 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Réservation du Louvre</title>
+{% extends "ReservationBundle:Default:base.html.twig" %}
 
-    {% block stylesheets %}
+{% block title %}{{ parent() }} - Paiement {% endblock %}
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-        <script src="https://js.stripe.com/v3/"></script>
+{% block stylesheets %}{{ parent() }}{% endblock %}
 
-    {% endblock %}
+{% block body %} {{ parent() }}
 
-</head>
-<body>
-
-<div class="col-lg-6 rounded-circle">
-    <ul class="list-group">
-        <li class="list-group-item">Date : {{ command.date|date("d/m/Y") }}</li>
-        <li class="list-group-item">Type de billet : {% if command.type == 1 %}Journée {% elseif command.type == 0 %} Demi-Journée {% endif %}</li>
-        <li class="list-group-item">Adresse email : {{ command.email }}</li>
-        <li class="list-group-item">
-            <div class="col-lg-12">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Prénom</th>
-                        <th>Nom</th>
-                        <th>Date de naissance</th>
-                        <th>Pays</th>
-                        <th>Type & prix</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for ticket in command.tickets %}
-                    <tr>
-                        <td>{{ ticket.firstName }}</td>
-                        <td>{{ ticket.lastName }}</td>
-                        <td>{{ ticket.birthday|date('d/m/Y') }}</td>
-                        <td>{{ ticket.country }}</td>
-                        <td>{{ ticket.type }} : {{ ticket.price }}</td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </li>
-        <li class="list-group-item text-center">
-            <form action="http://localhost/P4/Symfony/web/app_dev.php/payment/validation" method="POST">
-                <script
-                        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                        data-key="pk_test_H75BpLVwVoeOxQqF6zPIhjAJ"
-                        data-amount="{{ command.getTotalPrice }}"
-                        data-name="Paiement des tickets"
-                        data-description="Musée du Louvre"
-                        data-image="{{ asset('paris_louvre_icon.png') }}"
-                        data-locale="auto"
-                        data-zip-code="true"
-                        data-currency="eur">
-                </script>
-            </form>
-        </li>
-    </ul>
-
-
+<div class="container">
+    <div class="row mb-2">
+        <div class="col-lg-12 text-center">
+            <h4 class="bg-secondary p-3 mt-2 rounded"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Récapitulatif de votre commande</h4>
+        </div>
+    </div>
 </div>
 
+<div class="container">
+    <div class="row mb-2">
+        <div class="col-lg-4">
+            <ul class="list-group">
+                <li class="list-group-item"><b> Date :</b> {{ command.date|date("d/m/Y") }}</li>
+                <li class="list-group-item"><b> Type de billet :</b> {% if command.type == 1 %}Journée {% elseif command.type == 0 %} Demi-Journée {% endif %}</li>
+                <li class="list-group-item"><b> Adresse email :</b> {{ command.email }}</li>
+                <div class="row pull-right">
+                    <div class="col-lg-12 mt-2">
+                        <form action="http://localhost/P4/Symfony/web/app_dev.php/payment/validation" method="POST">
+                            <script
+                                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                    data-key="pk_test_H75BpLVwVoeOxQqF6zPIhjAJ"
+                                    data-amount="{{ command.getTotalPrice }}"
+                                    data-name="Paiement des tickets"
+                                    data-label="Payer avec une carte bancaire"
+                                    data-description="Musée du Louvre"
+                                    data-image="{{ asset('paris_louvre_icon.png') }}"
+                                    data-locale="auto"
+                                    data-zip-code="true"
+                                    data-currency="eur">
+                            </script>
+                        </form>
+                    </div>
+                </div>
+            </ul>
+        </div>
 
-</body>
-</html>
+        <div class="col-sm-12 d-md-none d-lg-none">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <table class="table table-bordered table-sm text-center">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th></th>
+                            <th>Prénom</th>
+                            <th>Nom</th>
+                            <th>Prix</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% set n = 1 %}
+                        {% for ticket in command.tickets %}
+                            <tr>
+                                <td><b>Ticket {{ n }}</b></td>
+                                <td>{{ ticket.firstName }}</td>
+                                <td>{{ ticket.lastName }}</td>
+                                <td>{{ ticket.price }} €</td>
+                            </tr>
+                            {% set n = n + 1 %}
+                        {% endfor %}
+                        <tr class="list-group-item-secondary">
+                            <td><b>Total</b></td>
+                            <td></td>
+                            <td></td>
+                            <td><b>{{ command.getTotalPrice() / 100 }} €</b></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-lg-8 d-none d-md-block d-lg-block">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <table class="table table-bordered table-sm text-center">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th></th>
+                            <th>Prénom</th>
+                            <th>Nom</th>
+                            <th>Date de naissance</th>
+                            <th>Pays</th>
+                            <th>Type & prix</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% set n = 1 %}
+                        {% for ticket in command.tickets %}
+                            <tr>
+                                <td><b>Ticket {{ n }}</b></td>
+                                <td>{{ ticket.firstName }}</td>
+                                <td>{{ ticket.lastName }}</td>
+                                <td>{{ ticket.birthday|date('d/m/Y') }}</td>
+                                <td>{{ ticket.country }}</td>
+                                <td>{{ ticket.type }} : {{ ticket.price }} €</td>
+                            </tr>
+                            {% set n = n + 1 %}
+                        {% endfor %}
+                        <tr class="list-group-item-secondary">
+                            <td><b>Prix Total</b></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><b>{{ command.getTotalPrice() / 100 }} Euros</b></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    {% block javascripts %}{{ parent() }}
+        {% endblock %}
+
+
+{% endblock %}

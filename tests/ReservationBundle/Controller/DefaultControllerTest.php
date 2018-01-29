@@ -6,12 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class DefaultControllerTest extends WebTestCase
 {
-    public function testIndex()
+    /**
+     *  On vérifie que la page d'accueil du site est valide
+     */
+    public function testHomePageResponse()
     {
         $client = static::createClient();
-
         $crawler = $client->request('GET', '/');
-
-        $this->assertContains('Hello World', $client->getResponse()->getContent());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 }

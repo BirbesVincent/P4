@@ -55,7 +55,7 @@ class Command
     private $email;
 
     /**
-     * @ORM\OneToMany(targetEntity="ReservationBundle\Entity\Ticket", mappedBy="Command")
+     * @ORM\OneToMany(targetEntity="ReservationBundle\Entity\Ticket", mappedBy="Command", cascade={"persist"})
      */
     private $tickets;
 

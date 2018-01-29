@@ -1,36 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Réservation du Louvre</title>
+{% extends "ReservationBundle:Default:base.html.twig" %}
 
-    {% block stylesheets %}
+{% block title %}{{ parent() }} - Réservation {% endblock %}
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}">
-        <link href="{{ asset('js/bootstrap.js') }}">
-        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+{% block stylesheets %}{{ parent() }}{% endblock %}
 
-    {% endblock %}
-
-</head>
-<body>
-<!--Section top -->
-<section id="top">
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-                <img class="embed-responsive" src="{{ asset('Louvre_Museum.jpg') }}">
-        </div>
-    </div>
-</section>
-<!--Section  -->
-<!-- Affichage message si erreur -->
-{% for message in app.session.flashbag.get('info') %}
-    <div class="col-lg-12 bg-warning">
-        <p>Message d'erreur : {{ message }}</p>
-    </div>
-{% endfor %}
+{% block body %} {{ parent() }}
 
 <section class="mt-3" id="reservation-section">
     <div class="container-fluid">
@@ -125,7 +99,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-lg-12 col-md-12">
-                                            {{ form_label(form.tickets, "Informations sur les visiteurs", {'label_attr': {'class': 'control-label'}}) }}
+                                            {{ form_label(form.tickets, "Informations sur les futurs visiteurs", {'label_attr': {'class': 'control-label'}}) }}
                                             {{ form_errors(form.tickets) }}
                                             {{ form_widget(form.tickets, {'attr': {'class': 'form-control'}}) }}
                                         </div>
@@ -146,120 +120,6 @@
     </div>
 </section>
 
-    {% block javascripts %}
+    {% block javascripts %}{{ parent() }}{% endblock %}
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-        <script async defer
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8ZDycWLNyfK62bbu9o_pSTsZsQjgalBU &callback=initMap">
-        </script>
-        <script>
-            function initMap() {
-                var louvre = {lat: 48.860711, lng: 2.337640};
-                var map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 15,
-                    center: louvre
-                });
-                var marker = new google.maps.Marker({
-                    position: louvre,
-                    map: map
-                });
-            }
-        </script>
-        <script>
-            $(function(){
-            $.datepicker.regional['fr'] = {
-                closeText: 'Fermer',
-                prevText: 'Précédent',
-                nextText: 'Suivant',
-                currentText: 'Aujourd\'hui',
-                monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
-                monthNamesShort: ['Janv.','Févr.','Mars','Avril','Mai','Juin','Juil.','Août','Sept.','Oct.','Nov.','Déc.'],
-                dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
-                dayNamesShort: ['Dim.','Lun.','Mar.','Mer.','Jeu.','Ven.','Sam.'],
-                dayNamesMin: ['D','L','M','M','J','V','S'],
-                weekHeader: 'Sem.',
-                dateFormat: 'dd/mm/yy',
-                firstDay: 1,
-                isRTL: false,
-                showMonthAfterYear: false,
-                yearSuffix: ''};
-            $.datepicker.setDefaults($.datepicker.regional['fr']);
-
-                disableDays = function(date) {
-                    console.log(date);
-                    var dateDay = date.getDate();
-                    var month = date.getMonth();
-                    var day = date.getDay();
-                    if (day == 2 || day == 0) {
-                        return [false] ;
-                    }
-                    else if ((dateDay == 25 && month == 11) || (dateDay == 1 && month == 4) || (dateDay == 1 && month == 10))
-                    {
-                        return [false] ;
-                    }
-                    else {
-                        return [true] ;
-                    }
-                }
-                var dateToday = new Date();
-                $('#datepicker').datepicker({
-                    minDate : dateToday,
-                    beforeShowDay: disableDays });
-                $('#reservationbundle_ticket_user_birthday').datepicker({
-                    changeMonth: true,
-                    changeYear: true
-                });
-            })
-        </script>
-
-
-        <script type="text/javascript">
-            $(document).ready(function() {
-                var $container = $('div#reservationbundle_command_tickets');
-                var index = $container.find(':input').length;
-                $('#add_category').click(function(e) {
-                    addCategory($container);
-                    e.preventDefault();
-                    return false;
-                });
-
-                if (index == 0) {
-                    addCategory($container);
-                } else {
-                    $container.children('div').each(function() {
-                        addDeleteLink($(this));
-                    });
-                }
-
-                function addCategory($container) {
-                    var template = $container.attr('data-prototype')
-                        .replace(/__name__label__/g, '')
-                        .replace(/__name__/g,        index)
-                    ;
-
-                    var $prototype = $(template);
-                    if (!index == 0) {
-                        addDeleteLink($prototype);
-                    }
-
-                    $container.append($prototype);
-                    index++;
-                }
-
-                function addDeleteLink($prototype) {
-                    var $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer</a>');
-                    $prototype.append($deleteLink);
-                    $deleteLink.click(function(e) {
-                        $prototype.remove();
-                        e.preventDefault();
-                        return false;
-                    });
-                }
-            });
-        </script>
-
-    {% endblock %}
-
-</body>
-</html>
+{% endblock %}

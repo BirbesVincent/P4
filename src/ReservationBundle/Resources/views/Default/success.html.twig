@@ -1,0 +1,55 @@
+{% extends "ReservationBundle:Default:base.html.twig" %}
+
+{% block title %}{{ parent() }} - Confirmation {% endblock %}
+
+{% block stylesheets %}{{ parent() }}{% endblock %}
+
+{% block body %} {{ parent() }}
+
+    <div class="container">
+        <div class="row bg-transparent">
+            <div class="col-lg-12">
+                <div class="jumbotron text-center">
+                    <a href="{{ path('reservation_homepage') }}" class="btn btn-primary btn-danger" id="button-return"><i class="fa fa-reply" aria-hidden="true"></i> Retour au menu</a>
+                    <h1><i class="fa fa-check-circle" aria-hidden="true"></i> Paiement Validé !</h1>
+                        <h2><i class="fa fa-desktop" aria-hidden="true"></i> Un mail vous a été envoyé contenant le(s) billet(s).</h2>
+
+                    <div class="row mt-2">
+                        <div class="col-lg-4">
+                        <div class="card" style="width: 100%">
+                            <img class="card-img-top" src="{{ asset('prepare.jpg') }}" alt="Card image cap">
+                            <div class="card-img-overlay text-center">
+                                <h4 class="card-title bg-dark w-100 p-3"><a href="https://www.paris.fr/" class="text-white">Préparez votre séjour</a></h4>
+                            </div>
+                        </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="card" style="width: 100%">
+                                <img class="card-img-top" src="{{ asset('travel.jpg') }}" alt="Card image cap">
+                                <div class="card-img-overlay text-center">
+                                    <h4 class="card-title bg-dark w-100 p-3"><a href="https://www.parisinfo.com/paris-pratique/se-deplacer-a-paris" class="text-white">Anticipez vos trajets</a></h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="card" style="width: 100%">
+                                <img class="card-img-top" src="{{ asset('hotel.jpg') }}" alt="Card image cap">
+                                <div class="card-img-overlay text-center">
+                                    <h4 class="card-title bg-dark w-100 p-3"><a href="https://www.parisinfo.com/ou-dormir/infos/guides/hebergements-a-petits-prix" class="text-white">Réservez votre hébergement</a></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{ include("ReservationBundle:Default:footer.html.twig") }}
+
+    {% block javascripts %}{{ parent() }}{% endblock %}
+
+{% endblock %}
+

@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use ReservationBundle\Form\TicketType;
 use ReservationBundle\Form\CommandType;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManager;
 
 class DefaultController extends Controller
 {
@@ -47,6 +48,7 @@ class DefaultController extends Controller
                 }
                 $em->persist($ticket);
             }
+            $em->persist($command);
             $request->getSession()->set('command', $command);
             return $this->redirectToRoute('reservation_payment');
         }
@@ -67,6 +69,9 @@ class DefaultController extends Controller
             $session->getFlashBag()->add('info', 'Nombre de tickets max atteint !');
             return $this->redirectToRoute('reservation_homepage');
         }
+
+
+
         return $this->render('ReservationBundle:Default:payment.html.twig', array(
             'command' => $command
         ));
@@ -74,16 +79,23 @@ class DefaultController extends Controller
 
     public function validationAction(Request $request)
     {
-        $session = $request->getSession();
-        $command = $session->get('command');
-
-
+        $command = $request->getSession()->get('command');
         $payment = $this->get('command_payment');
-        $payment->sendingPayment($request);
+        $payment->sendingPayment($request, $command);
+
 
         if (true){
-            return $this->redirectToRoute('reservation_payment');
+            $mailer = $this->get('send_mail');
+            $mailer->send($request);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($command);
+            $em->flush();
+
+
+            return $this->render('ReservationBundle:Default:success.html.twig');
+
         } elseif (false) {
+            $request->getSession()->getFlashBag()->add('info', 'Paiement refusé !');
             return $this->redirectToRoute('reservation_homepage');
         }
 

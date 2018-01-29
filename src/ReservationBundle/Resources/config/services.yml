@@ -11,3 +11,9 @@ services:
 
     command_payment:
         class: ReservationBundle\Payment\Payment
+
+    send_mail:
+        class: ReservationBundle\SendMail\SendMail
+        arguments:
+            - "@Mailer"
+            - "@twig"

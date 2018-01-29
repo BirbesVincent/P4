@@ -1,0 +1,37 @@
+
+
+<h3>Validation de votre commande !</h3>
+
+Bonjour,
+
+Vous avez reservé des tickets pour visiter le Louvre.
+Voilà le récapitulatif de votre commande :
+
+Visite prévu le {{ command.date|date('d/m/Y') }} pour la {{ command.type }}.
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Date de naissance</th>
+            <th>Pays</th>
+            <th>Tarif</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ticket in command.tickets %}
+            <tr>
+                <td>{{ ticket.firstName }}</td>
+                <td>{{ ticket.lastName }}</td>
+                <td>{{ ticket.birthday|date('d/m/Y') }}</td>
+                <td>{{ ticket.country }}</td>
+                <td>{{ ticket.type }} : {{ ticket.price }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+Merci & bonne visite.
+
+<img src="{{ asset('louvre-top.jpg') }}">

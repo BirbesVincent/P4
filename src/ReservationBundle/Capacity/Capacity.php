@@ -2,9 +2,7 @@
 
 namespace ReservationBundle\Capacity;
 
-
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Validator\Constraints\DateTime;
 use Doctrine\ORM\EntityManager;
 
 class Capacity
