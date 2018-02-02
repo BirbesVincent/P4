@@ -63,14 +63,25 @@ class DefaultController extends Controller
         $session = $request->getSession();
         $command = $session->get('command');
         $capacity = $this->get('reservation_capacity');
+
+        //check date
+        $date_now = date('d/m/Y');
+        $date_nowhours = date('H:i:s');
+        $date_user = $command->getDate()->format('d/m/Y');
+        if ($date_user == $date_now){
+            if ($date_nowhours > '14:00:00') {
+                $session = $request->getSession();
+                $session->getFlashBag()->add('info', 'Impossible de réserver des billets "journée" après 14h !');
+                return $this->redirectToRoute('reservation_homepage');
+            }
+        }
+
         if ($capacity->checkMaxCapacity($request) === true)
         {
             $session = $request->getSession();
             $session->getFlashBag()->add('info', 'Nombre de tickets max atteint !');
             return $this->redirectToRoute('reservation_homepage');
         }
-
-
 
         return $this->render('ReservationBundle:Default:payment.html.twig', array(
             'command' => $command

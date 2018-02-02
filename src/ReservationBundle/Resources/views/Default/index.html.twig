@@ -2,124 +2,240 @@
 
 {% block title %}{{ parent() }} - Réservation {% endblock %}
 
-{% block stylesheets %}{{ parent() }}{% endblock %}
-
 {% block body %} {{ parent() }}
 
-<section class="mt-3" id="reservation-section">
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="container-fluid">
-                <div class="col-lg-12">
-                    <!-- Section form -->
-                    <section id="form">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="well">
-                                {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-                                {{ form_errors(form) }}
+    <!-- Affichage message si erreur -->
+    {% for message in app.session.flashbag.get('info') %}
+        <div class="alert alert-danger" role="alert">
+            <strong>ERREUR !</strong> {{ message }}
+        </div>
+    {% endfor %}
 
-                                    <div class="row">
-                                        <div class="col-lg-6">
+        <section id="reservation-section">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="container-fluid">
+                        <div class="col-lg-12">
+                            <!-- Section form -->
+                            <section id="form">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="well">
+                                            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                                            {{ form_errors(form) }}
+
                                             <div class="row">
                                                 <div class="col-lg-12">
-                                                    <div  class="btn btn-block btn-primary btn-default mb-2"><span class="glyphicon glyphicon-arrow-right"></span> Etape 1 : choisir sa date de visite</div>
-                                                </div>
-                                            <div class="form-group col-6 col-md-6">
-                                                {{ form_label(form.date) }}
-                                                {{ form_errors(form.date) }}
-                                                {{ form_widget(form.date, {'id': 'datepicker' , 'attr': {'class': 'form-control'}}) }}
-                                            </div>
-                                            <div class="form-group col-6 col-md-6">
-                                                {{ form_label(form.type) }}
-                                                {{ form_errors(form.type) }}
-                                                {{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
-                                            </div>
-                                            </div>
-                                            <div class="row">
-                                            <div class="form-group col-6 col-md-6">
-                                                {{ form_label(form.email) }}
-                                                {{ form_errors(form.email) }}
-                                                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
-                                            </div>
-                                            <div class="form-group col-6 col-md-6">
-                                                <label>Cliquez pour ajouter un ticket</label>
-                                                <a href="#" id="add_category" class="btn btn-default btn-primary w-100">Ajouter un ticket</a>
-                                            </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="row">
-                                            <div class="col-lg-12">
-                                                <div  class="btn btn-block btn-danger btn-default mb-2">Lire attentivement : conseils pour les futurs visiteurs</div>
-                                            </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-5">
-                                                        <table class="table table-bordered table-sm rounded">
-                                                            <thead>
-                                                            <tr>
-                                                                <th class="text-center">Catégorie</th>
-                                                                <th class="text-center">Prix</th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div  class="btn btn-block btn-danger btn-default mb-2 mt-3">Lire attentivement : conseils pour les futurs visiteurs</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-5">
+                                                            <table class="table table-sm rounded table-bordered table-hover">
+                                                                <thead class="thead-inverse text-center">
                                                                 <tr class="text-center">
+                                                                    <th>Catégorie</th>
+                                                                    <th>Prix</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr>
                                                                     <td>Bébé (Moins de 4 ans)</td>
-                                                                    <td>Gratuit</td>
+                                                                    <td class="text-center">Gratuit</td>
                                                                 </tr>
-                                                                <tr class="text-center">
+                                                                <tr>
                                                                     <td>Enfant (Entre 4 & 12 ans)</td>
-                                                                    <td>8 €</td>
+                                                                    <td class="text-center">8 €</td>
                                                                 </tr>
-                                                                <tr class="text-center">
+                                                                <tr>
                                                                     <td>Réduit (Sous certaines conditions)</td>
-                                                                    <td>10 €</td>
+                                                                    <td class="text-center">10 €</td>
                                                                 </tr>
-                                                                <tr class="text-center">
+                                                                <tr>
                                                                     <td>Sénior (A partir de 60 ans)</td>
-                                                                    <td>12 €</td>
+                                                                    <td class="text-center">12 €</td>
                                                                 </tr>
-                                                                <tr class="text-center">
+                                                                <tr>
                                                                     <td>Adulte (A partir de 12 ans)</td>
-                                                                    <td>16 €</td>
+                                                                    <td class="text-center">16 €</td>
                                                                 </tr>
-                                                            </tbody>
-                                                        </table>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="col-lg-7">
+                                                            <ul class="list-group">
+                                                                <li class="list-group-item">Impossible de réserver pour les dimanches & jours fériés</li>
+                                                                <li class="list-group-item">Tout les justificatifs doivent présentés à l'accueil.</li>
+                                                                <li class="list-group-item">La réservation d'un billet "journée" n'est plus possible après 14h.</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="col-lg-7">
-                                                        <ul class="list-group">
-                                                            <li class="list-group-item">Impossible de réserver pour les dimanches & jours fériés</li>
-                                                            <li class="list-group-item">Tout les justificatifs doivent présentés à l'accueil.</li>
-                                                            <li class="list-group-item">La réservation d'un billet "journée" n'est plus possible après 14h.</li>
-                                                        </ul>
+                                                <div class="col-lg-12">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div  class="btn btn-block btn-primary btn-default mb-2"><span class="glyphicon glyphicon-arrow-right"></span> Etape 1 : choisir sa date de visite</div>
+                                                        </div>
+                                                        <div class="form-group col-6 col-md-6">
+                                                            {{ form_errors(form.date) }}
+                                                            {{ form_widget(form.date, {'id': 'datepicker' , 'attr': {'class': 'form-control'}, 'attr': {'placeholder' : 'Date de visite'}}) }}
+                                                        </div>
+                                                        <div class="form-group col-6 col-md-6">
+                                                            {{ form_errors(form.type) }}
+                                                            {{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-6 col-md-6">
+                                                            {{ form_errors(form.email) }}
+                                                            {{ form_widget(form.email, {'attr': {'class': 'form-control'}, 'attr': {'placeholder' : 'Votre Email'}}) }}
+                                                        </div>
+                                                        <div class="form-group col-6 col-md-6">
+                                                            <a href="#" id="add_category" class="btn btn-default btn-primary w-100">Ajouter un ticket</a>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-lg-12 col-md-12">
-                                            {{ form_label(form.tickets, "Informations sur les futurs visiteurs", {'label_attr': {'class': 'control-label'}}) }}
-                                            {{ form_errors(form.tickets) }}
-                                            {{ form_widget(form.tickets, {'attr': {'class': 'form-control'}}) }}
-                                        </div>
-                                    </div>
-                                    {{ form_rest(form) }}
-                                    {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
-                                    {{ form_end(form) }}
-                                </div>
-                                </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
 
 
-                            </div>
-                        </section>
+                                                    {{ form_errors(form.tickets) }}
+                                                    {{ form_row(form.tickets , {'attr': {'class': 'form-control'}}) }}
+
+
+                                                </div>
+                                            </div>
+                                            {{ form_rest(form) }}
+                                            {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+                                            {{ form_end(form) }}
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
-</section>
 
-    {% block javascripts %}{{ parent() }}{% endblock %}
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- Gestion du datepicker -->
+    <script>
+        $(function(){
+            $.datepicker.regional['fr'] = {
+                closeText: 'Fermer',
+                prevText: 'Précédent',
+                nextText: 'Suivant',
+                currentText: 'Aujourd\'hui',
+                monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
+                monthNamesShort: ['Janv.','Févr.','Mars','Avril','Mai','Juin','Juil.','Août','Sept.','Oct.','Nov.','Déc.'],
+                dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
+                dayNamesShort: ['Dim.','Lun.','Mar.','Mer.','Jeu.','Ven.','Sam.'],
+                dayNamesMin: ['D','L','M','M','J','V','S'],
+                weekHeader: 'Sem.',
+                dateFormat: 'dd/mm/yy',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: ''};
+            $.datepicker.setDefaults($.datepicker.regional['fr']);
+
+            disableDays = function(date) {
+                console.log(date);
+                var dateDay = date.getDate();
+                var month = date.getMonth();
+                var day = date.getDay();
+                if (day == 2 || day == 0) {
+                    return [false] ;
+                }
+                else if ((dateDay == 25 && month == 11) || (dateDay == 1 && month == 4) || (dateDay == 1 && month == 10))
+                {
+                    return [false] ;
+                }
+                else {
+                    return [true] ;
+                }
+            }
+            var dateToday = new Date();
+            $('#datepicker').datepicker({
+                minDate : dateToday,
+                beforeShowDay: disableDays });
+            $('#reservationbundle_ticket_user_birthday').datepicker({
+                changeMonth: true,
+                changeYear: true
+            });
+
+            <!-- Suppression du ticket journée après 14h -->
+            /*document.getElementById('datepicker').addEventListener("focus", function() {
+                $('#reservationbundle_command_type').val(0);
+            });*/
+            document.getElementById('reservationbundle_command_type').addEventListener("focus", function(e){
+                var date_user = document.getElementById('datepicker').value;
+                var date_today = new Date().toLocaleDateString("fr-FR");
+                console.log(date_today, date_user);
+                if (date_user === date_today) {
+                    $('#reservationbundle_command_type option[value="1"]').prop("disabled", true);
+                } else {
+                    $('#reservationbundle_command_type option[value="1"]').prop("disabled", false);
+                }
+            });
+
+        })
+    </script>
+
+    <!-- Gestion de l'ajout des tickets -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var $container = $('div#reservationbundle_command_tickets');
+            var index = $container.find(':input').length;
+            $('#add_category').click(function(e) {
+                addCategory($container);
+                e.preventDefault();
+                return false;
+            });
+
+            if (index == 0) {
+                addCategory($container);
+            } else {
+                $container.children('div').each(function() {
+                    addDeleteLink($(this));
+                });
+            }
+
+            function addCategory($container) {
+                var template = $container.attr('data-prototype')
+                    .replace(/__name__label__/g, '')
+                    .replace(/__name__/g,        index)
+                ;
+                var $prototype = $(template);
+                if (!index == 0) {
+                    addDeleteLink($prototype);
+                }
+
+                $container.append($prototype);
+                index++;
+            }
+
+            function addDeleteLink($prototype) {
+                var $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer</a>');
+                $prototype.append($deleteLink);
+                $deleteLink.click(function(e) {
+                    $prototype.remove();
+                    e.preventDefault();
+                    return false;
+                });
+            }
+        });
+    </script>
 
 {% endblock %}

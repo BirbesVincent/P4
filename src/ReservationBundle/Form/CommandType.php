@@ -29,8 +29,8 @@ class CommandType extends AbstractType
             ->add('type',   ChoiceType::class,array(
                 'label'     => 'Type de billet',
                 'choices' => array(
-                    'Journée' => true,
-                    'Demi-journée (14h00)' => false
+                    'Demi-journée (14h00)' => false,
+                    'Journée' => true
                 )
             ))
             ->add('email',  EmailType::class,array(

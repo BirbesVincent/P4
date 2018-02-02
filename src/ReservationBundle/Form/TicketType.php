@@ -19,7 +19,7 @@ class TicketType extends AbstractType
         $builder
             ->add('reduced', CheckboxType::class, array(
                 'label' => 'Tarif Réduit ?',
-                'required' => false
+                'required' => false,
             ))
             ->add('firstName',  TextType::class, array(
                 'label'         => 'Prénom'
