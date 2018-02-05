@@ -23,7 +23,8 @@ class CommandType extends AbstractType
                 'label'     => 'Date de visite',
                 'format'    =>'dd/MM/yyyy',
                 'widget'    =>'single_text',
-                'attr' => ['readonly' => true],
+                'attr' => [
+                    'readonly'       => true],
                 'html5'     => false
             ))
             ->add('type',   ChoiceType::class,array(
@@ -37,12 +38,15 @@ class CommandType extends AbstractType
                 'label'     => 'Adresse Email'
             ))
             ->add('tickets', CollectionType::class, array(
+                'label'        => false,
                 'entry_type'   => TicketType::class,
                 'allow_add'    => true,
                 'allow_delete' => true
             ))
             ->add('save',   SubmitType::class,array(
-                'label'     => 'Réserver'
+                'label'     => 'Réserver',
+                'attr' => [
+                    'class'    => 'btn btn-dark']
             ));
     }/**
      * {@inheritdoc}

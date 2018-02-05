@@ -27,72 +27,88 @@
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                     <div class="row">
-                                                        <div class="col-lg-12">
-                                                            <div  class="btn btn-block btn-danger btn-default mb-2 mt-3">Lire attentivement : conseils pour les futurs visiteurs</div>
+                                                        <div class="col-lg-1 mt-1 mb-1">
+                                                            <!-- Button trigger modal -->
+                                                            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
+                                                                Tarifs
+                                                            </button>
+
+                                                            <!-- Modal -->
+                                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Tarifs</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="col-lg-12">
+                                                                                <table class="table table-sm rounded table-bordered table-hover">
+                                                                                    <thead class="thead-inverse text-center">
+                                                                                    <tr class="text-center">
+                                                                                        <th>Catégorie</th>
+                                                                                        <th>Prix</th>
+                                                                                    </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                    <tr>
+                                                                                        <td>Bébé (Moins de 4 ans)</td>
+                                                                                        <td class="text-center">Gratuit</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>Enfant (Entre 4 & 12 ans)</td>
+                                                                                        <td class="text-center">8 €</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>Réduit (Sous certaines conditions)</td>
+                                                                                        <td class="text-center">10 €</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>Sénior (A partir de 60 ans)</td>
+                                                                                        <td class="text-center">12 €</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>Adulte (A partir de 12 ans)</td>
+                                                                                        <td class="text-center">16 €</td>
+                                                                                    </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-11 mt-1 mb-1">
+                                                            <div  class="btn btn-block btn-dark btn-default mb-2 step">Etape 1 : choisir sa date de visite</div>
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-lg-5">
-                                                            <table class="table table-sm rounded table-bordered table-hover">
-                                                                <thead class="thead-inverse text-center">
-                                                                <tr class="text-center">
-                                                                    <th>Catégorie</th>
-                                                                    <th>Prix</th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                <tr>
-                                                                    <td>Bébé (Moins de 4 ans)</td>
-                                                                    <td class="text-center">Gratuit</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Enfant (Entre 4 & 12 ans)</td>
-                                                                    <td class="text-center">8 €</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Réduit (Sous certaines conditions)</td>
-                                                                    <td class="text-center">10 €</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Sénior (A partir de 60 ans)</td>
-                                                                    <td class="text-center">12 €</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Adulte (A partir de 12 ans)</td>
-                                                                    <td class="text-center">16 €</td>
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
+                                                        <div class="col-lg-12 tarifs">
+                                                            <ol class="breadcrumb alert-danger">
+                                                                <li class="breadcrumb-item active">Impossible de réserver pour les dimanches & jours fériés</li>
+                                                                <li class="breadcrumb-item active">La réservation d'un billet "journée" n'est plus possible après 14h.</li>
+                                                            </ol>
                                                         </div>
-                                                        <div class="col-lg-7">
-                                                            <ul class="list-group">
-                                                                <li class="list-group-item">Impossible de réserver pour les dimanches & jours fériés</li>
-                                                                <li class="list-group-item">Tout les justificatifs doivent présentés à l'accueil.</li>
-                                                                <li class="list-group-item">La réservation d'un billet "journée" n'est plus possible après 14h.</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <div class="row">
-                                                        <div class="col-lg-12">
-                                                            <div  class="btn btn-block btn-primary btn-default mb-2"><span class="glyphicon glyphicon-arrow-right"></span> Etape 1 : choisir sa date de visite</div>
-                                                        </div>
-                                                        <div class="form-group col-6 col-md-6">
+
+                                                        <div class="form-group col-lg-3 col-sm-12">
                                                             {{ form_errors(form.date) }}
                                                             {{ form_widget(form.date, {'id': 'datepicker' , 'attr': {'class': 'form-control'}, 'attr': {'placeholder' : 'Date de visite'}}) }}
                                                         </div>
-                                                        <div class="form-group col-6 col-md-6">
+                                                        <div class="form-group col-lg-3 col-sm-12">
                                                             {{ form_errors(form.type) }}
                                                             {{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
                                                         </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="form-group col-6 col-md-6">
+                                                        <div class="form-group col-lg-3 col-sm-12">
                                                             {{ form_errors(form.email) }}
                                                             {{ form_widget(form.email, {'attr': {'class': 'form-control'}, 'attr': {'placeholder' : 'Votre Email'}}) }}
                                                         </div>
-                                                        <div class="form-group col-6 col-md-6">
+                                                        <div class="form-group col-lg-3 col-sm-12">
                                                             <a href="#" id="add_category" class="btn btn-default btn-primary w-100">Ajouter un ticket</a>
                                                         </div>
                                                     </div>
@@ -100,19 +116,16 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-12">
-
+                                                        <div  class="btn btn-block btn-dark btn-default mt-2 mb-1 step">Etape 2 : Définir les billets</div>
 
                                                     {{ form_errors(form.tickets) }}
-                                                    {{ form_row(form.tickets , {'attr': {'class': 'form-control'}}) }}
-
+                                                    {{ form_widget(form.tickets , {'attr': {'class': 'form-control'}}) }}
 
                                                 </div>
                                             </div>
                                             {{ form_rest(form) }}
                                             {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
                                             {{ form_end(form) }}
-
-
 
                                         </div>
                                     </div>
@@ -165,7 +178,8 @@
                 else {
                     return [true] ;
                 }
-            }
+            };
+            
             var dateToday = new Date();
             $('#datepicker').datepicker({
                 minDate : dateToday,
@@ -176,20 +190,19 @@
             });
 
             <!-- Suppression du ticket journée après 14h -->
-            /*document.getElementById('datepicker').addEventListener("focus", function() {
-                $('#reservationbundle_command_type').val(0);
-            });*/
             document.getElementById('reservationbundle_command_type').addEventListener("focus", function(e){
                 var date_user = document.getElementById('datepicker').value;
-                var date_today = new Date().toLocaleDateString("fr-FR");
-                console.log(date_today, date_user);
-                if (date_user === date_today) {
-                    $('#reservationbundle_command_type option[value="1"]').prop("disabled", true);
+                var date_today = new Date();
+                var heure = date_today.getHours();
+                console.log(heure);
+                if (date_user === date_today.toLocaleDateString("fr-FR")) {
+                    if (heure > 14) {
+                        $('#reservationbundle_command_type option[value="1"]').prop("disabled", true);
+                    }
                 } else {
                     $('#reservationbundle_command_type option[value="1"]').prop("disabled", false);
                 }
             });
-
         })
     </script>
 

@@ -42,6 +42,7 @@ body {
  * The CSS shown here will not be introduced in the Quickstart guide, but shows
  * how you can use CSS to style your Element's container.
  */
+
 .StripeElement {
     background-color: white;
     height: 40px;
@@ -75,10 +76,20 @@ body {
     height:100%;
 }
 
-
-
 .alert {
     margin-bottom: 0;
     padding: 2rem;
     text-align: center;
+}
+
+.carousel-inner {
+    background-image: url("../tour_img-335314-148.jpg");
+}
+
+.form-group {
+    margin-bottom: 0;
+}
+
+#reservationbundle_command_save {
+    margin: 10px;
 }
